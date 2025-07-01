@@ -81,6 +81,8 @@ export type BlogPostData = {
   draft?: boolean
   image?: string
   category?: string
+  updated?: Date
+  lang?: string
   prevTitle?: string
   prevSlug?: string
   nextTitle?: string
