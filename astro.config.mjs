@@ -22,7 +22,7 @@ import rehypeMermaid from 'rehype-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://fuwari.vercel.app/",
+  site: "https://faina.me", // 如果你有自定义域名，使用自定义域名；否则使用 "https://yf-faina.github.io"
   base: "/",
   trailingSlash: "always",
   integrations: [

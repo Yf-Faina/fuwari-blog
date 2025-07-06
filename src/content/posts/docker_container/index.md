@@ -6,7 +6,7 @@ image: 'https://img.fainablog.tech/20250701195427095.png'
 tags: [docker]
 category: '部署'
 draft: false
-lang: 'CN'
+lang: ''
 ---
 最近为了~~修改实习简历的项目展示~~将某管理系统部署出来，选择了**容器化部署**的方式，为了白嫖PaaS服务，毕竟为了这个东西花那么高的成本去租服务器，我觉得是很没必要。
 
@@ -64,33 +64,19 @@ docker-compose.yml文件是一种组织多个docker镜像一起工作的yaml文�
 前端代码中配置了 `basePath`，通过如下⬇️方式指定了后端接口地址：
 
 ```typescript
-
 constapi = newEmployeeApi(
-
   newConfiguration({
-
     basePath:'https://localhost:7069',
-
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
     accessToken: (name?: string, scopes?: string[]) => {
-
       if (name === 'Bearer') {
-
         returnuser.token + '';
-
       }
-
       return'';
-
     },
-
     middleware: [loginMiddleWare],
-
   })
-
 );
-
 ```
 
 上述写法在本地开发环境下运行良好，但当前后端被分别打包进独立容器并部署后，问题就出现了：**前端无法成功请求后端 API 并获取数据**。这是因为 `basePath` 中写死了 `https://localhost:7069`，在容器中，前端实际上是在访问其自身容器的 7069 端口，而不是后端容器。由于前后端运行在两个完全隔离的容器中，使用 `localhost：7069` 无法实现跨容器通信。
@@ -104,60 +90,35 @@ constapi = newEmployeeApi(
 1. 项目根目录下按照如下文件结构创建相关文件夹和文件
 
 ```txt
-
-    project/ 
-
-    ├── docker-compose.yml 
-
-    └── nginx/ 
-
-        └── nginx.conf <-- 创建这个文件 
-
-        └── conf.d/ <-- 创建这个目录
-
-            └── default.conf <-- 创建这个文件
-
+project/ 
+├── docker-compose.yml 
+└── nginx/ 
+    └── nginx.conf <-- 创建这个文件 
+    └── conf.d/ <-- 创建这个目录
+        └── default.conf <-- 创建这个文件
 ```
 
 2. 分别在 `nginx.conf`和 `default.conf`文件中写好对应的配置内容
 3. 需要在 `docker compose.yml`中添加Nginx的部分
 
 ```yaml
-
 nginx:
-
     image: nginx:latest
-
     container_name: card-nginx
-
     restart: always
-
     ports:
-
       - "80:80"      # 将宿主机的 80 端口映射到 Nginx 容器的 80 端口
-
      # - "443:443"   # 如果需要 HTTPS, 可以取消注释此行，并配置 SSL 证书
-
     volumes:
-
      # 挂载宿主机上的 Nginx 主配置文件
-
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-
      # 挂载宿主机上的 Nginx server block 配置目录
-
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
-
     depends_on:
-
       - frontend  
-
       - backend  
-
     networks:
-
       - card-network
-
 ```
 
 4. 端 API 客户端 `basePath`: 替换为 `http://localhost/api`
@@ -167,9 +128,7 @@ nginx:
 当我解决了上一个问题后，前端容器中仍然返回了500错误。查看后端服务的log后发现数据库已经连接成功了，但表格不存在。
 
 ```
-
 MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'card.employee' doesn't exist
-
 ```
 
 通过Navicat连接Mysql映射端口查看发现其中确实一张数据表都没有，但本地开发时实际表格都存在。它背后通常隐藏着一个关键的认知差异：**你连接的数据库，可能并不是你以为的那个。**
@@ -205,59 +164,35 @@ MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'card.employee' doesn'
    项目结构应该看起来像这样：
 
 ```
-
-   project/
-
-   ├── docker-compose.yml
-
-   ├── nginx/
-
-   ├── Card.Backend/
-
-   ├── card-frontend/
-
-   └── mysql-init/        # <--- 新建的目录
-
-       └── init.sql       # <--- 导出的 SQL 文件放这里
+project/
+├── docker-compose.yml
+├── nginx/
+├── Card.Backend/
+├── card-frontend/
+└── mysql-init/        # <--- 新建的目录
+    └── init.sql       # <--- 导出的 SQL 文件放这里
 
 ```
 
 3.**修改 `docker-compose.yml` 文件：** 在 `mysql` 服务的 `volumes` 配置中，添加一行，将你宿主机上的 `mysql-init` 目录挂载到 MySQL 容器内部的 `/docker-entrypoint-initdb.d` 目录。
 
 ```yaml
-
-   services:
-
+  services:
      mysql:
-
        image: mysql:8.0
-
        container_name: card-mysql
-
        restart: always
-
        environment:
-
          MYSQL_ROOT_PASSWORD: 123456
-
          MYSQL_DATABASE: card
-
        ports:
-
          - "3307:3306"
-
        volumes:
-
          - mysql_data:/var/lib/mysql           # 数据持久化卷
-
          - ./mysql-init:/docker-entrypoint-initdb.d:ro# <--- 添加这一行
-
        networks:
-
          - card-network
-
    # ... 其他服务和卷/网络定义
-
 ```
 
 4.**删除旧的 Docker 数据卷并重新启动所有服务（非常重要！）** 因为 `docker-entrypoint-initdb.d` 目录下的脚本只在 MySQL 容器的**数据目录是空的**（即第一次启动或数据卷被清空）时才会执行。
@@ -265,16 +200,12 @@ MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'card.employee' doesn'
 - 停止并移除所有服务：
 
   ```bash
-
   docker-compose down
-
   ```
 - 删除 MySQL 数据卷： 你需要找到你的数据卷的完整名称。可以运行 `docker volume ls` 来查看所有数据卷的列表。 然后删除它：
 
   ```bash
-
   docker volume rm card-management_mysql_data
-
   ```
   （请根据 `docker volume ls` 的实际输出调整卷名）
 - 重新启动所有服务：
