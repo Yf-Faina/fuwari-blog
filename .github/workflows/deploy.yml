@@ -50,5 +50,6 @@ jobs:
           personal_token: ${{ secrets.PERSONAL_TOKEN }}
           external_repository: Yf-Faina/Yf-Faina.github.io
           publish_dir: ./dist
-          publish_branch: main
-          cname: fainablog.tech  # 如果你有自定义域名，请替换这里
+          publish_branch: dev1  # 部署到dev1分支
+          cname: faina.me
+          keep_files: false
