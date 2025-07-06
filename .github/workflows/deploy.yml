@@ -50,7 +50,7 @@ jobs:
       - name: Deploy to main repository
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          deploy_key: ${{ secrets.DEPLOY_KEY }}
           external_repository: Yf-Faina/Yf-Faina.github.io
           publish_dir: ./dist
           publish_branch: dev1  # 部署到dev1分支
