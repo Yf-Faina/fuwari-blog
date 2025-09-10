@@ -1,8 +1,6 @@
 import rss from "@astrojs/rss";
 import MarkdownIt from "markdown-it";
-
-const sanitizeHtml = require("sanitize-html");
-
+import sanitizeHtml from "sanitize-html";
 import { getSortedPosts } from "@utils/content-utils";
 import { url } from "@utils/url-utils";
 import { siteConfig } from "@/config";
