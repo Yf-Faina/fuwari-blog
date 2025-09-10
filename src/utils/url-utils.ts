@@ -39,8 +39,6 @@ export function getDir(path: string): string {
 	return path.substring(0, lastSlashIndex + 1);
 }
 
-const BASE_URL = process.env.BASE_URL || "/";
-
 export function url(path: string): string {
-	return joinUrl("", BASE_URL, path);
+	return joinUrl("", import.meta.env.BASE_URL || "/", path);
 }
