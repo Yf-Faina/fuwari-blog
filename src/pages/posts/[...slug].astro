@@ -1,6 +1,6 @@
 ---
-import path from "node:path";
 import { getCollection } from "astro:content";
+import path from "node:path";
 import License from "@components/misc/License.astro";
 import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "@i18n/i18nKey";
@@ -19,24 +19,26 @@ export async function getStaticPaths() {
 	const blogEntries = await getCollection("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
-	
+
 	// 获取带有导航信息的排序文章
 	const sortedPosts = await getSortedPosts();
-	
+
 	return blogEntries.map((entry) => {
 		// 从排序后的文章中找到对应的导航信息
 		const sortedEntry = sortedPosts.find((p) => p.slug === entry.slug);
-		
+
 		return {
 			params: { slug: entry.slug },
-			props: { 
+			props: {
 				entry,
-				navData: sortedEntry ? {
-					nextSlug: sortedEntry.data.nextSlug,
-					nextTitle: sortedEntry.data.nextTitle,
-					prevSlug: sortedEntry.data.prevSlug,
-					prevTitle: sortedEntry.data.prevTitle
-				} : {}
+				navData: sortedEntry
+					? {
+							nextSlug: sortedEntry.data.nextSlug,
+							nextTitle: sortedEntry.data.nextTitle,
+							prevSlug: sortedEntry.data.prevSlug,
+							prevTitle: sortedEntry.data.prevTitle,
+						}
+					: {},
 			},
 		};
 	});

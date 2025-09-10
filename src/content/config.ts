@@ -12,24 +12,27 @@ const postsCollection = defineCollection({
 		category: z.string().optional().nullable().default(""),
 		lang: z.string().optional().default(""),
 
-    /* For internal use */
-    prevTitle: z.string().default(''),
-    prevSlug: z.string().default(''),
-    nextTitle: z.string().default(''),
-    nextSlug: z.string().default(''),
-  }),
-})
+		/* For internal use */
+		prevTitle: z.string().default(""),
+		prevSlug: z.string().default(""),
+		nextTitle: z.string().default(""),
+		nextSlug: z.string().default(""),
+	}),
+});
 
 const specCollection = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    // 你可以根据spec文件夹下文件的实际frontmatter定义更多属性
-    published: z.date(),
-  }),
-})
+	schema: z.object({
+		title: z.string(),
+		description: z.string().optional(),
+		// 你可以根据spec文件夹下文件的实际frontmatter定义更多属性
+		published: z.date(),
+	}),
+});
 
-export const collections: Record<string, ReturnType<typeof defineCollection>> = {
-  posts: postsCollection,
-  spec: specCollection,
-}
+export const collections: Record<
+	string,
+	ReturnType<typeof defineCollection>
+> = {
+	posts: postsCollection,
+	spec: specCollection,
+};

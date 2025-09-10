@@ -87,18 +87,18 @@ export type LIGHT_DARK_MODE =
 	| typeof AUTO_MODE;
 
 export type BlogPostData = {
-  body: string
-  title: string
-  published: Date
-  description: string
-  tags: string[]
-  draft?: boolean
-  image?: string
-  category?: string
-  updated?: Date
-  lang?: string
-  prevTitle?: string
-  prevSlug?: string
-  nextTitle?: string
-  nextSlug?: string
-}
+	body: string;
+	title: string;
+	published: Date;
+	description: string;
+	tags: string[];
+	draft?: boolean;
+	image?: string;
+	category?: string;
+	updated?: Date;
+	lang?: string;
+	prevTitle?: string;
+	prevSlug?: string;
+	nextTitle?: string;
+	nextSlug?: string;
+};

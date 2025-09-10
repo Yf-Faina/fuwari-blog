@@ -17,7 +17,9 @@ async function getRawSortedPosts() {
 	return sorted;
 }
 
-export async function getSortedPosts(): Promise<any[]> {
+export async function getSortedPosts(): Promise<
+	Awaited<ReturnType<typeof getRawSortedPosts>>
+> {
 	const sorted = await getRawSortedPosts();
 
 	for (let i = 1; i < sorted.length; i++) {
