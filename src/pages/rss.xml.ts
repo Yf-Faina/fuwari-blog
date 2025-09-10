@@ -1,9 +1,9 @@
 import rss from "@astrojs/rss";
 import { getSortedPosts } from "@utils/content-utils";
 import { url } from "@utils/url-utils";
-import type { APIContext } from "astro";
+// import type { APIContext } from "astro";
 import MarkdownIt from "markdown-it";
-import sanitizeHtml from "sanitize-html";
+const sanitizeHtml = require("sanitize-html");
 import { siteConfig } from "@/config";
 
 const parser = new MarkdownIt();
@@ -16,7 +16,7 @@ function stripInvalidXmlChars(str: string): string {
 	);
 }
 
-export async function GET(context: APIContext) {
+export async function GET(context: any): Promise<Response> {
 	const blog = await getSortedPosts();
 
 	return rss({

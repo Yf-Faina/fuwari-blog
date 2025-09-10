@@ -2,12 +2,12 @@
  * Based on the discussion at https://github.com/expressive-code/expressive-code/issues/153#issuecomment-2282218684
  */
 import { definePlugin } from "@expressive-code/core";
+import type { ExpressiveCodePlugin } from "@expressive-code/core";
 
-export function pluginLanguageBadge() {
+export function pluginLanguageBadge(): ExpressiveCodePlugin {
 	return definePlugin({
 		name: "Language Badge",
-		// @ts-ignore
-		baseStyles: ({ _cssVar }) => `
+		baseStyles: () => `
       [data-language]::before {
         position: absolute;
         z-index: 2;
@@ -15,6 +15,7 @@ export function pluginLanguageBadge() {
         top: 0.5rem;
         padding: 0.1rem 0.5rem;
         content: attr(data-language);
+        font-family: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         font-size: 0.75rem;
         font-weight: bold;
         text-transform: uppercase;

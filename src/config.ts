@@ -32,11 +32,11 @@ export const siteConfig: SiteConfig = {
   favicon: [    // Leave this array empty to use the default favicon
     {
       src: '/favicon/favicon.ico',    // 使用你的 favicon.ico 文件
+      theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
       sizes: '32x32',
     }
   ]
-}
-
+};
 
 export const navBarConfig: NavBarConfig = {
 	links: [
