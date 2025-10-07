@@ -77,6 +77,10 @@ export type LicenseConfig = {
 	url: string;
 };
 
+export type ExpressiveCodeConfig = {
+	theme: string;
+};
+
 export type LIGHT_DARK_MODE =
 	| typeof LIGHT_MODE
 	| typeof DARK_MODE
@@ -97,8 +101,4 @@ export type BlogPostData = {
 	prevSlug?: string;
 	nextTitle?: string;
 	nextSlug?: string;
-};
-
-export type ExpressiveCodeConfig = {
-	theme: string;
 };

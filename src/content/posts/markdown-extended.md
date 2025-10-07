@@ -82,8 +82,6 @@ This is a note with a custom title.
 > [!TIP]
 > The GitHub syntax is also supported.
 ```
-<<<<<<< HEAD
-=======
 
 ### Spoiler
 
@@ -95,4 +93,3 @@ The content :spoiler[is hidden **ayyy**]!
 The content :spoiler[is hidden **ayyy**]!
 
 ```
->>>>>>> upstream/main

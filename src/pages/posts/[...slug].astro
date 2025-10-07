@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 import path from 'node:path'
 import { getCollection } from 'astro:content'
 import License from '@components/misc/License.astro'
@@ -44,6 +45,55 @@ export async function getStaticPaths() {
 
 const { entry, navData } = Astro.props
 const { Content, headings } = await entry.render()
+=======
+import { getCollection } from "astro:content";
+import path from "node:path";
+import License from "@components/misc/License.astro";
+import Markdown from "@components/misc/Markdown.astro";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getSortedPosts } from "@utils/content-utils";
+import { getDir, getPostUrlBySlug } from "@utils/url-utils";
+import { Icon } from "astro-icon/components";
+import { licenseConfig } from "src/config";
+import ImageWrapper from "../../components/misc/ImageWrapper.astro";
+import PostMetadata from "../../components/PostMeta.astro";
+import { profileConfig, siteConfig } from "../../config";
+import { formatDateToYYYYMMDD } from "../../utils/date-utils";
+
+export async function getStaticPaths() {
+	const blogEntries = await getCollection("posts", ({ data }) => {
+		return import.meta.env.PROD ? data.draft !== true : true;
+	});
+
+	// 获取带有导航信息的排序文章
+	const sortedPosts = await getSortedPosts();
+
+	return blogEntries.map((entry) => {
+		// 从排序后的文章中找到对应的导航信息
+		const sortedEntry = sortedPosts.find((p) => p.slug === entry.slug);
+
+		return {
+			params: { slug: entry.slug },
+			props: {
+				entry,
+				navData: sortedEntry
+					? {
+							nextSlug: sortedEntry.data.nextSlug,
+							nextTitle: sortedEntry.data.nextTitle,
+							prevSlug: sortedEntry.data.prevSlug,
+							prevTitle: sortedEntry.data.prevTitle,
+						}
+					: {},
+			},
+		};
+	});
+}
+
+const { entry, navData } = Astro.props;
+const { Content, headings } = await entry.render();
+>>>>>>> dc0b8e67ffa73fc5f2e514e98e54cc4ae7acd9bf
 
 const { remarkPluginFrontmatter } = await entry.render();
 
