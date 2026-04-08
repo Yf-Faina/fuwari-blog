@@ -2,7 +2,7 @@
 title: docker 踩坑记录
 published: 2025-06-22
 description: ''
-image: 'https://img.fainablog.tech/20250701195427095.png'
+image: 'https://img.664558.xyz/20250701195427095.png'
 tags: [docker]
 category: '部署'
 draft: false

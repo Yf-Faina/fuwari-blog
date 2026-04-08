@@ -19,7 +19,7 @@ lang: ''
    _{i,j}=\sum_{k,l}w_{i,j,k,l}x_{k,l}=\sum_{a,b}v_{i,j,a,b}x_{i+a,j+b}
    $$
 
-   <img src="https://img.fainablog.tech/20250705211021726.jpg" alt="权重变形示意图" style="width: 400px; height: auto; display: block; margin: 0 auto;">
+   <img src="https://img.664558.xyz/20250705211021726.jpg" alt="权重变形示意图" style="width: 400px; height: auto; display: block; margin: 0 auto;">
 3. $v$是$w$的重新索引$v_{i,j,a,b}=w_{i,j,i+a,j+b}$
 
 ### 原则 #1 - 平移不变性

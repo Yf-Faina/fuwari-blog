@@ -2,7 +2,7 @@
 title: K-接邻(K Nearest Neighbor KNN)
 published: 2025-02-27
 description: ''
-image: 'https://img.fainablog.tech/20250705205905520.png'
+image: 'https://img.664558.xyz/20250705205905520.png'
 tags: [学习笔记]
 category: 'Machine Learning'
 draft: false 
