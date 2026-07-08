@@ -1,0 +1,88 @@
+---
+import { Icon } from "astro-icon/components";
+import { getSortedPosts } from "../../utils/content-utils";
+import WidgetLayout from "./WidgetLayout.astro";
+
+function formatTimeAgo(date: Date): string {
+	const now = new Date();
+	const diffMs = now.getTime() - date.getTime();
+	const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+	if (days <= 0) return "今天";
+	return `${days}天前`;
+}
+
+function formatWordsCount(words: number): string {
+	if (words >= 10000) return `${(words / 10000).toFixed(1)}万`;
+	if (words >= 1000) return `${(words / 1000).toFixed(1)}千`;
+	return String(words);
+}
+
+// 支持中英文混排：中文按单字统计，英文/数字按词统计。
+function countWords(text = ""): number {
+	const cn = text.match(/[\u4e00-\u9fa5]/g)?.length ?? 0;
+	const en =
+		text.replace(/[\u4e00-\u9fa5]/g, "").match(/\b\w+\b/g)?.length ?? 0;
+	return cn + en;
+}
+
+function formatDuration(from: Date, to: Date): string {
+	let years = to.getFullYear() - from.getFullYear();
+	let months = to.getMonth() - from.getMonth();
+
+	if (to.getDate() < from.getDate()) months -= 1;
+	if (months < 0) {
+		years -= 1;
+		months += 12;
+	}
+
+	if (years <= 0) return `${months}个月`;
+	return `${years}年${months}个月`;
+}
+
+const posts = await getSortedPosts();
+const totalPosts = `${posts.length}篇`;
+const totalWords = posts.reduce(
+	(sum, post) => sum + countWords(post.body ?? ""),
+	0,
+);
+const latestPost = posts[0];
+
+const lastUpdate = latestPost
+	? formatTimeAgo(new Date(latestPost.data.published))
+	: "暂无";
+const wordsString = formatWordsCount(totalWords);
+const siteStartDate = new Date("2023-07-02"); // 改成你的博客生日
+const runningDuration = formatDuration(siteStartDate, new Date());
+---
+
+<WidgetLayout name="状态" id="statistics">
+  <div class="flex flex-col gap-2 ">
+    <!-- 文章总数行 -->
+    <div class="flex items-center justify-between text-neutral-700 dark:text-neutral-300 h-7 pl-2 pr-2">
+      <div class="flex items-center">
+        <Icon name="material-symbols:book-2-outline-rounded" class="text-[1.4rem] mr-2" />
+        <span>文章总数</span>
+      </div>
+      <span class="font-semibold text-[var(--primary)]">{totalPosts}</span>
+    </div>
+
+    <!-- 总字数行 -->
+    <div class="flex items-center justify-between text-neutral-700 dark:text-neutral-300 h-7 pl-2 pr-2">
+      <div class="flex items-center">
+        <Icon name="material-symbols:match-word-rounded" class="text-[1.4rem] mr-2" />
+        <span>总字数</span>
+      </div>
+      <span class="font-semibold text-[var(--primary)]">{wordsString}</span>
+    </div>
+
+    <!-- 运营时长行 -->
+    <div class="flex items-center justify-between text-neutral-700 dark:text-neutral-300 h-7 pl-2 pr-2 mb-1.5">
+      <div class="flex items-center">
+        <Icon name="material-symbols:calendar-clock-outline-rounded" class="text-[1.4rem] mr-2" />
+        <span>运营时长</span>
+      </div>
+      <span class="font-semibold text-[var(--primary)]">{runningDuration}</span>
+    </div>
+  </div>
+</WidgetLayout>
