@@ -8,6 +8,7 @@ import swup from "@swup/astro";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
+import mermaid from "astro-mermaid";
 import satteriCallouts from "satteri-callouts";
 import { expressiveCodeConfig } from "./src/config.ts";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.ts";
@@ -16,10 +17,14 @@ import { satteriKatex } from "./src/plugins/satteri-katex.mjs";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://faina.me",
+	site: "https://faina.dev",
 	base: "/",
 	trailingSlash: "always",
 	integrations: [
+		mermaid({
+			theme: "default",
+			autoTheme: true,
+		}),
 		tailwind({ nesting: true }),
 		swup({
 			animationClass: "transition-swup-",
