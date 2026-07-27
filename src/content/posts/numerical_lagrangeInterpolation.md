@@ -45,11 +45,8 @@ $$
 
 当$\boxed {n\ge 1}$时，希望找到$l_i(x),i=0,\dots,n$使得$l_i(x_j)=\delta_{ij}$；然后令$L_n(x)=\sum_{i=0}^{n}l_i(x)y_i$，则显然有$L_n(x_i)=y_i$
 
-:::important
-
-只有在$i=j$时，才会得到$1$，其他都为$0$，所以求和中的$n$项只剩下了$1$项
-
-:::
+> [!important]
+> 只有在$i=j$时，才会得到$1$，其他都为$0$，所以求和中的$n$项只剩下了$1$项
 
 $$
 L_n(x_i) = \sum _{j=0}^{n}l_j(x_i)y_j = \underbrace{l_i(x_i)}_{=1}y_i = y_i

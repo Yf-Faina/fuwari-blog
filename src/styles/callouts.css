@@ -1,0 +1,55 @@
+/*
+ * Callout 外观（当前使用 satteri-callouts 的 docusaurus 主题）。
+ * 浅色模式：light = 背景色，dark = 文字色；深色模式正好反过来。
+ * 想改颜色时只改每种类型的 3 个变量，不要直接改 node_modules。
+ */
+
+[data-callout="note"] {
+  --callout-note-border-color: #60a5fa;
+  --callout-note-color-light: #eff6ff;
+  --callout-note-color-dark: #1e3a8a;
+}
+
+[data-callout="tip"] {
+  /* 当前 Tip：更浅的薄荷绿背景，避免默认绿色太沉。 */
+  --callout-tip-border-color: #2dd4bf;
+  --callout-tip-color-light: #e6fffb;
+  --callout-tip-color-dark: #115e59;
+}
+
+/* Docusaurus 默认没有 important 类型，必须直接设置它实际读取的 --rc-* 变量。 */
+[data-callout="important"] {
+  --rc-border-color: #a78bfa;
+  --rc-color-light: #f5f3ff;
+  --rc-color-dark: #2e1065;
+  --rc-foreground-color-light: #5b21b6;
+  --rc-foreground-color-dark: #ede9fe;
+}
+
+[data-callout="warning"] {
+  --callout-warning-border-color: #fbbf24;
+  --callout-warning-color-light: #fffbeb;
+  --callout-warning-color-dark: #92400e;
+}
+
+[data-callout="caution"],
+[data-callout="danger"] {
+  --rc-border-color: #fb7185;
+  --rc-color-light: #fff1f2;
+  --rc-color-dark: #4c0519;
+  --rc-foreground-color-light: #9f1239;
+  --rc-foreground-color-dark: #ffe4e6;
+}
+
+.callout {
+  border-radius: 0.75rem;
+}
+
+.callout-title {
+  font-weight: 700;
+}
+
+.callout-title-icon svg {
+  width: 1.15em;
+  height: 1.15em;
+}

@@ -1,12 +1,13 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import path from "node:path";
+import getReadingTime from "reading-time";
 import License from "@components/misc/License.astro";
 import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { getSortedPosts } from "@utils/content-utils";
+import { getPostSlug, getSortedPosts } from "@utils/content-utils";
 import { getDir, getPostUrlBySlug } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
 import { licenseConfig } from "src/config";
@@ -25,10 +26,11 @@ export async function getStaticPaths() {
 
 	return blogEntries.map((entry) => {
 		// 从排序后的文章中找到对应的导航信息
-		const sortedEntry = sortedPosts.find((p) => p.slug === entry.slug);
+		const slug = getPostSlug(entry);
+		const sortedEntry = sortedPosts.find((p) => getPostSlug(p) === slug);
 
 		return {
-			params: { slug: entry.slug },
+			params: { slug },
 			props: {
 				entry,
 				navData: sortedEntry
@@ -45,9 +47,13 @@ export async function getStaticPaths() {
 }
 
 const { entry, navData } = Astro.props;
-const { Content, headings } = await entry.render();
-
-const { remarkPluginFrontmatter } = await entry.render();
+const slug = getPostSlug(entry);
+const { Content, headings } = await render(entry);
+const readingTime = getReadingTime(entry.body ?? "");
+const postStats = {
+	words: readingTime.words,
+	minutes: Math.max(1, Math.round(readingTime.minutes)),
+};
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -79,14 +85,14 @@ const jsonLd = {
                     <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
                         <Icon name="material-symbols:notes-rounded"></Icon>
                     </div>
-                    <div class="text-sm">{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</div>
+                    <div class="text-sm">{postStats.words} {" " + i18n(I18nKey.wordsCount)}</div>
                 </div>
                 <div class="flex flex-row items-center">
                     <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
                         <Icon name="material-symbols:schedule-outline-rounded"></Icon>
                     </div>
                     <div class="text-sm">
-                        {remarkPluginFrontmatter.minutes} {" " + i18n(remarkPluginFrontmatter.minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount)}
+                        {postStats.minutes} {" " + i18n(postStats.minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount)}
                     </div>
                 </div>
             </div>
@@ -128,7 +134,7 @@ const jsonLd = {
                 <Content />
             </Markdown>
 
-            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
+            {licenseConfig.enable && <License title={entry.data.title} slug={slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
 
         </div>
     </div>

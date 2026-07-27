@@ -1,5 +1,5 @@
 import rss from "@astrojs/rss";
-import { getSortedPosts } from "@utils/content-utils";
+import { getPostSlug, getSortedPosts } from "@utils/content-utils";
 import { url } from "@utils/url-utils";
 import MarkdownIt from "markdown-it";
 import sanitizeHtml from "sanitize-html";
@@ -30,7 +30,7 @@ export async function GET(context: { site?: URL | string }): Promise<Response> {
 				title: post.data.title,
 				pubDate: post.data.published,
 				description: post.data.description || "",
-				link: url(`/posts/${post.slug}/`),
+				link: url(`/posts/${getPostSlug(post)}/`),
 				content: sanitizeHtml(parser.render(cleanedContent), {
 					allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
 				}),

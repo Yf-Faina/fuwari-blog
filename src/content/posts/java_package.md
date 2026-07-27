@@ -41,9 +41,8 @@ public class Clock{
 }
 ```
 
-:::info
-以上代码在 `Clock.java`中
-:::
+> [!TIP]
+> 以上代码在 `Clock.java`中
 
 同时也可这么引入：
 

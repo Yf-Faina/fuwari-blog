@@ -1,6 +1,8 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const postsCollection = defineCollection({
+	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/posts" }),
 	schema: z.object({
 		title: z.string(),
 		published: z.date(),
@@ -21,18 +23,15 @@ const postsCollection = defineCollection({
 });
 
 const specCollection = defineCollection({
+	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/spec" }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional(),
-		// 你可以根据spec文件夹下文件的实际frontmatter定义更多属性
 		published: z.date(),
 	}),
 });
 
-export const collections: Record<
-	string,
-	ReturnType<typeof defineCollection>
-> = {
+export const collections = {
 	posts: postsCollection,
 	spec: specCollection,
 };

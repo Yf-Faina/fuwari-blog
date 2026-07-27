@@ -80,9 +80,9 @@ class Outer {
 }
 ```
 
-:::note
-**在 `Main()`中 `outer.asyncHello()`的这里调用的是 `Outer`类的实例方法 `asyncHello()`，而不是直接调用匿名内部类的方法**
-:::
+> [!NOTE]
+> **在 `Main()`中 `outer.asyncHello()`的这里调用的是 `Outer`类的实例方法 `asyncHello()`，而不是直接调用匿名内部类的方法**
+
 
 `asyncHello()`内部的内容：
 

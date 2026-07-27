@@ -160,9 +160,8 @@ while (!Q.empty()) {
 }
 ```
 
-:::tip
-BFS是“全面扩散、逐层递进”；DFS是“一路到底、逐步回退”
-:::
+> [!tip]
+> BFS是“全面扩散、逐层递进”；DFS是“一路到底、逐步回退”
 
 ## **部分题目详细分析与总结**
 
@@ -234,10 +233,8 @@ int main() {
     return 0;
 }
 ```
-
-:::tip
-所有物品的排序，是按照物品的单位价值从大到小排序的，这样的选择才是最优的。贪心算法中，需要每步选择最优的，以局部最优达到整体最优
-:::
+> [!TIP]
+> 所有物品的排序，是按照物品的单位价值从大到小排序的，这样的选择才是最优的。贪心算法中，需要每步选择最优的，以局部最优达到整体最优
 
 ### **第二天8月1日：二叉树、深搜、宽搜、堆**
 
@@ -270,13 +267,12 @@ Input        Output
 1 2 9
 ```
 
-:::tip
-对于 $30\%$ 的数据，保证有 $n \le 1000$：
-
-对于 $50\%$ 的数据，保证有 $n \le 5000$；
-
-对于全部的数据，保证有 $n \le 10000$。
-:::
+> [!TIP]
+> 对于 $30\%$ 的数据，保证有 $n \le 1000$：
+>
+> 对于 $50\%$ 的数据，保证有 $n \le 5000$；
+>
+> 对于全部的数据，保证有 $n \le 10000$。
 
 **代码**
 
@@ -667,10 +663,8 @@ W.W.W.....W.
 3
 ```
 
-:::tip[OUTPUT DETAILS]
-There are three ponds: one in the upper left, one in the lower left, and one along the right side.
-
-:::
+> [!tip]OUTPUT DETAILS
+> There are three ponds: one in the upper left, one in the lower left, and one along the right side.
 
 **代码**
 

@@ -14,10 +14,8 @@ lang: ''
 
 即$\forall    \varepsilon > 0$，存在多项式$P_m(x)$，使得$|f(x)-P_m(x)|<\varepsilon$对一切$x\in[a,b]$成立。
 
-:::important
-
-一致逼近：$\left\|f(x)-y(x)\right\|_\infty=\max_{a\leq x\leq b}\left|f(x)-y(x)\right|$
-:::
+> [!important]
+> 一致逼近：$\left\|f(x)-y(x)\right\|_\infty=\max_{a\leq x\leq b}\left|f(x)-y(x)\right|$
 
 ### 范数与赋范线性空间
 
@@ -125,11 +123,8 @@ $$
 3. $(f_1+f_2,g)=(f_1,g)+(f_2,g)$           线性性
 4. $(f,f)\ge0$，当且仅当$f=0$时$(f,f)=0$               正定性
 
-:::tip
-
-用定积分可以证明满足上述四条公理
-
-:::
+> [!tip]
+> 用定积分可以证明满足上述四条公理
 
 ---
 
