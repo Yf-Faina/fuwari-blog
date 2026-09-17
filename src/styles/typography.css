@@ -1,0 +1,15 @@
+/* 全站正文与标题统一使用 MiSans；代码和 KaTeX 在各自样式中单独覆盖。 */
+html,
+body {
+  font-family: "MiSans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: 380;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: inherit;
+}

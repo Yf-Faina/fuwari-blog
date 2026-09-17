@@ -83,6 +83,7 @@ R_{\theta} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta
 $$
 ### 顺时针
 顺时针旋转方向的旋转矩阵应该如何推导得到？
+
 如果$R_{\theta}$是逆时针旋转$\theta$角度，那么$R_{-\theta}$即为顺时针旋转$\theta$角度，将$-\theta$带入逆时针旋转矩阵得到：
 $$
 R_{-\theta} = \begin{bmatrix} \cos(-\theta) & -\sin(-\theta) \\ \sin(-\theta) & \cos(-\theta)\end{bmatrix}
@@ -97,6 +98,7 @@ R_{-\theta}=\begin{bmatrix} \cos\theta & \sin\theta \\ -\sin\theta & \cos\theta 
 $$
 ### 结论
 观察可以发现，矩阵$R_{-\theta}=R_{\theta}^T$，从定义上来说，逆时针旋转与顺时针旋转互为逆操作，即$R_{-\theta}=R_{\theta}^{-1}$
+
 *线性代数中规定，当一个矩阵的逆矩阵与转置矩阵相等时，该矩阵即为正交矩阵*
 ## 线性变换
 以上几种变换，可以发现，皆可写为如下形式的线性组合：
@@ -114,6 +116,7 @@ x'&=Mx
 \end{align}
 $$
 我们认为以上这种通过一个矩阵乘以输入坐标从而得到输出坐标的变换称为**线性变换**
+
 **缩放、对称、切变、旋转都是线性变换**
 ## Homogenous Coordinates 齐次坐标
 ### Translation 平移变换

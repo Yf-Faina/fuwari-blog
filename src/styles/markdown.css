@@ -5,17 +5,30 @@
 
     h1, h2, h3, h4, h5, h6 {
         .anchor {
-            @apply transition -m-0.5 ml-[0.2ch] p-0.5 select-none opacity-0 no-underline !important;
+            @apply -m-0.5 p-0.5 no-underline !important;
+            color: inherit !important;
+            display: inline !important;
+            font: inherit !important;
 
             .anchor-icon {
-                @apply mx-[0.45ch] !important;
+                @apply inline-block ml-[0.65ch] mr-[0.45ch] size-[0.85em] fill-current opacity-0 transition !important;
+                color: var(--primary);
+                vertical-align: -0.08em;
+            }
+
+            &:hover, &:active {
+                @apply border-0 bg-transparent !important;
             }
         }
 
         &:hover {
-            .anchor {
+            .anchor-icon {
                 @apply opacity-100 !important;
             }
+        }
+
+        .anchor:focus-visible .anchor-icon {
+            @apply opacity-100 !important;
         }
     }
 

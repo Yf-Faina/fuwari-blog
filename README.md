@@ -96,4 +96,6 @@ Check out the [Contributing Guide](https://github.com/saicaca/fuwari/blob/main/C
 
 This project is licensed under the MIT License.
 
+Typography uses [MiSans](https://hyperos.mi.com/font/zh/), subject to the [MiSans Fonts License Agreement](https://hyperos.mi.com/font-download/MiSans%E5%AD%97%E4%BD%93%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE.pdf).
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari.svg?type=large&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari?ref=badge_large&issueType=license)

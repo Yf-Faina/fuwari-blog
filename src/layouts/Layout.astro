@@ -1,7 +1,8 @@
 ---
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import "misans/lib/Normal/MiSans-Regular.min.css";
+import "misans/lib/Normal/MiSans-Medium.min.css";
+import "misans/lib/Normal/MiSans-Semibold.min.css";
+import "misans/lib/Normal/MiSans-Bold.min.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
@@ -22,6 +23,7 @@ import "katex/dist/katex.css";
 import "satteri-callouts/theme/docusaurus";
 //import "satteri-callouts/theme/github";
 import "../styles/callouts.css";
+import "../styles/typography.css";
 
 interface Props {
 	title?: string;
@@ -219,8 +221,8 @@ import { siteConfig } from '../config';
 // (async function() {
 // 	try {
 // 		await Promise.all([
-// 			document.fonts.load("400 1em Roboto"),
-// 			document.fonts.load("700 1em Roboto"),
+// 			document.fonts.load('380 1em "MiSans"'),
+// 			document.fonts.load('630 1em "MiSans"'),
 // 		]);
 // 		document.body.classList.remove("hidden");
 // 	} catch (error) {

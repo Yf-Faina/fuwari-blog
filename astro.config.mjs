@@ -13,6 +13,7 @@ import satteriCallouts from "satteri-callouts";
 import { expressiveCodeConfig } from "./src/config.ts";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.ts";
 import { pluginLanguageBadge } from "./src/plugins/expressive-code/language-badge.ts";
+import { satteriHeadingLinks } from "./src/plugins/satteri-heading-links.mjs";
 import { satteriKatex } from "./src/plugins/satteri-katex.mjs";
 
 // https://astro.build/config
@@ -136,7 +137,7 @@ export default defineConfig({
 	// },
 	markdown: {
 		processor: satteri({
-			hastPlugins: [satteriCallouts(), satteriKatex()],
+			hastPlugins: [satteriCallouts(), satteriKatex(), satteriHeadingLinks],
 			features: {
 				directive: true,
 				math: true,
