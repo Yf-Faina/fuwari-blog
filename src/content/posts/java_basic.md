@@ -78,7 +78,7 @@ v 1.0
 | `double`  | `Double`    |
 | `byte`    | `Byte`      |
 
-可以将一个基础类型的数据转换为[对象](/zh/posts/Java面向对象/1.md)的形式，使它们一样可以参与运算与传递
+可以将一个基础类型的数据转换为[对象](/posts/java_basic/)的形式，使它们一样可以参与运算与传递
 
 ```java
 import java.util.Scanner;  
